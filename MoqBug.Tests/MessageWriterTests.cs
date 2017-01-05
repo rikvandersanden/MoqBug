@@ -1,6 +1,4 @@
-﻿using AmbientContext.DateTimeService;
-
-using Moq;
+﻿using Moq;
 
 using MoqBug.Tests.Customizations;
 
@@ -30,14 +28,13 @@ namespace MoqBug.Tests
             string message)
         {
             IFixture fixture = new Fixture().Customize(new AutoMoqCustomization());
-            Mock<IDateTimeService> dateTimeServiceMock = fixture.Freeze<Mock<IDateTimeService>>();
+            DateTimeFixture dateTimeFixture = fixture.Create<DateTimeFixture>();
 
             MessageWriter sut = fixture.Create<MessageWriter>();
-            sut.DateTimeProvider.Instance = dateTimeServiceMock.Object;
-
+            
             sut.Write(message);
 
-            dateTimeServiceMock.Verify(m => m.Now, Times.Once());
+            dateTimeFixture.DateTimeMock.Verify(m => m.Now, Times.Once());
         }
     }
 }

@@ -6,11 +6,11 @@ namespace MoqBug
 {
     public class MessageWriter
     {
-        public readonly AmbientDateTimeService DateTimeProvider = new AmbientDateTimeService();
+        private readonly AmbientDateTimeService _dateTimeProvider = new AmbientDateTimeService();
 
         public void Write(string message)
         {
-            Console.WriteLine($"{DateTimeProvider.Now.ToShortTimeString()} : {message}");
+            Console.WriteLine($"{_dateTimeProvider.Now.ToShortTimeString()} : {message}");
         }
     }
 }
