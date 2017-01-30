@@ -1,18 +1,15 @@
 ﻿using AmbientContext.DateTimeService;
 
-using Moq;
-
-
 namespace MoqBug.Tests.Customizations
 {
     public class DateTimeFixture
     {
-        public Mock<IDateTimeService> DateTimeMock { get; }
+        public IDateTimeService DateTimeService { get; }
 
-        public DateTimeFixture(Mock<IDateTimeService> dateTimeMock)
+        public DateTimeFixture(IDateTimeService dateTimeService)
         {
-            DateTimeMock = dateTimeMock;
-            AmbientDateTimeService.Create = () => new AmbientDateTimeService() { Instance = dateTimeMock.Object };
+            DateTimeService = dateTimeService;
+            AmbientDateTimeService.Create = () => new AmbientDateTimeService() { Instance = dateTimeService };
         }
     }
 }

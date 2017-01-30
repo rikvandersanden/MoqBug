@@ -1,9 +1,9 @@
-﻿using Moq;
+﻿using AmbientContext.DateTimeService;
+
+using Moq;
 
 using MoqBug.Tests.Customizations;
 
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoMoq;
 using Ploeh.AutoFixture.Xunit2;
 
 using Xunit;
@@ -14,27 +14,25 @@ namespace MoqBug.Tests
     {
         [Theory, AutoMoqData]
         public void Write_Always_CallsDateTimeService(
+            [Frozen] Mock<IDateTimeService> dateTimeServiceMock,
             DateTimeFixture dateTimeFixture,
             MessageWriter sut,
             string message)
         {
             sut.Write(message);
 
-            dateTimeFixture.DateTimeMock.Verify(dt => dt.Now, Times.Once());
+            dateTimeServiceMock.Verify(dt => dt.Now, Times.Once());
         }
 
-        [Theory, AutoData]
-        public void Write_Always_CallsDateTimeService_Manual(
+        [Theory, AutoMoqData]
+        public void Write_Always_CallsLogService(
+            LogFixture logFixture,
+            MessageWriter sut,
             string message)
         {
-            IFixture fixture = new Fixture().Customize(new AutoMoqCustomization());
-            DateTimeFixture dateTimeFixture = fixture.Create<DateTimeFixture>();
-
-            MessageWriter sut = fixture.Create<MessageWriter>();
-            
             sut.Write(message);
 
-            dateTimeFixture.DateTimeMock.Verify(m => m.Now, Times.Once());
+            logFixture.LoggerMock.Verify(l=> l.Information(It.IsAny<string>()));
         }
     }
 }

@@ -38,6 +38,14 @@
       <HintPath>..\packages\AmbientContext.DateTimeService.2.1.0\lib\net45\AmbientContext.DateTimeService.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AmbientContext.LogService.Serilog, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AmbientContext.LogService.Serilog.1.0.0\lib\net45\AmbientContext.LogService.Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.2.0\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
